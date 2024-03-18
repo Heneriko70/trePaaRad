@@ -78,6 +78,30 @@ function vinnersjekk() {
         vinnertekstEl.innerHTML = "";
     }
 }
+// Lager en funksjon som sjekker om noen har vunnet ved hjelp av if-statements.
+function vinnersjekk2() {
+    // Sjekker alle mulige vinnerkombinasjoner ved hjelp av if-statements.
+    if (b1El.innerHTML === b2El.innerHTML && b2El.innerHTML === b3El.innerHTML) {
+        vinnertekstEl.innerHTML = `Spiller ${b1El.innerHTML} vant`;
+    } else if (b4El.innerHTML === b5El.innerHTML && b5El.innerHTML === b6El.innerHTML) {
+        vinnertekstEl.innerHTML = `Spiller ${b4El.innerHTML} vant`;
+    } else if (b7El.innerHTML === b8El.innerHTML && b8El.innerHTML === b9El.innerHTML) {
+        vinnertekstEl.innerHTML = `Spiller ${b7El.innerHTML} vant`;
+    } else if (b1El.innerHTML === b4El.innerHTML && b4El.innerHTML === b7El.innerHTML) {
+        vinnertekstEl.innerHTML = `Spiller ${b1El.innerHTML} vant`;
+    } else if (b2El.innerHTML === b5El.innerHTML && b5El.innerHTML === b8El.innerHTML) {
+        vinnertekstEl.innerHTML = `Spiller ${b2El.innerHTML} vant`;
+    } else if (b3El.innerHTML === b6El.innerHTML && b6El.innerHTML === b9El.innerHTML) {
+        vinnertekstEl.innerHTML = `Spiller ${b3El.innerHTML} vant`;
+    } else if (b1El.innerHTML === b5El.innerHTML && b5El.innerHTML === b9El.innerHTML) {
+        vinnertekstEl.innerHTML = `Spiller ${b1El.innerHTML} vant`;
+    } else if (b3El.innerHTML === b5El.innerHTML && b5El.innerHTML === b7El.innerHTML) {
+        vinnertekstEl.innerHTML = `Spiller ${b3El.innerHTML} vant`;
+    } else {
+        vinnertekstEl.innerHTML = "";
+    }
+}
+
 
 
 
@@ -99,7 +123,6 @@ function spill() {
         this.innerHTML = spiller2;
     }
     // Kjører funksjonen vinnersjekk som sjekker om noen har vunnet.
-    vinnersjekk();
+    vinnersjekk1();
 }
-
 
