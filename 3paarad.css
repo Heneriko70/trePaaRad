@@ -2,7 +2,6 @@
     text-align: center;
 }
 
-
 #ramme {
     width: 450px;
     height: 450px;
@@ -10,6 +9,10 @@
     margin: auto;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    /* Add this line */
+    align-items: center;
+    /* Add this line */
 }
 
 .rad {
@@ -20,7 +23,7 @@
 }
 
 .boks {
-    width: 150px;
+    width: 148px;
     height: 148px;
     border: 1px solid black;
     display: flex;
