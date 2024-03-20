@@ -30,6 +30,21 @@ b9El.addEventListener('click', spill);
 // Lager variablen for der teksten om hvem som vant skal komme opp.
 var vinnertekstEl = document.querySelector("#vinnertekst");
 
+var metode1EL = document.querySelector("#metode1");
+var metode2EL = document.querySelector("#metode2");
+var metode = 1;
+// Lager en eventlistener for metode 1 knappen.
+metode1EL.addEventListener("click", function () {
+    metode = 1;
+});
+// Lager en eventlistener for metode 2 knappen.
+metode2EL.addEventListener("click", function () {
+    metode = 2;
+});
+
+var antallklikk = 0; // Lager en variabel som inneholder antall klikk.
+var vinner = ""; // Lager en variabel som inneholder hvem som vant.
+
 // Lager en funksjon som sjekker hvem sin tur det er.
 function klikktur() {
     // Sjekker om det er spiller 1 sin tur, hvis det er det så bytter den til spiller 2 sin tur.
@@ -43,7 +58,8 @@ function klikktur() {
 
 
 // Lager en funksjon som sjekker om noen har vunnet.
-function vinnersjekk() {
+function vinnersjekk1() {
+    console.log("vinnersjekk1");
     // Lager en variabel som inneholder alle mulige vinnerkombinasjoner.
     var vinnermuligheter = [
         [b1El, b2El, b3El],
@@ -56,8 +72,6 @@ function vinnersjekk() {
         [b3El, b5El, b7El]
     ];
 
-
-    var vinner = "";
 
     /* Lager en for loop som sjekker om noen har vunnet. For 
     hver kombinasjon av vinnermuligheter sjekker den om det er en vinner.
@@ -80,33 +94,44 @@ function vinnersjekk() {
 }
 // Lager en funksjon som sjekker om noen har vunnet ved hjelp av if-statements.
 function vinnersjekk2() {
+    console.log("vinnersjekk2");
+
     // Sjekker alle mulige vinnerkombinasjoner ved hjelp av if-statements.
     if (b1El.innerHTML === b2El.innerHTML && b2El.innerHTML === b3El.innerHTML) {
-        vinnertekstEl.innerHTML = `Spiller ${b1El.innerHTML} vant`;
+        vinner = b1El.innerHTML;
     } else if (b4El.innerHTML === b5El.innerHTML && b5El.innerHTML === b6El.innerHTML) {
-        vinnertekstEl.innerHTML = `Spiller ${b4El.innerHTML} vant`;
+        vinner = b4El.innerHTML;
     } else if (b7El.innerHTML === b8El.innerHTML && b8El.innerHTML === b9El.innerHTML) {
-        vinnertekstEl.innerHTML = `Spiller ${b7El.innerHTML} vant`;
+        vinner = b7El.innerHTML;
     } else if (b1El.innerHTML === b4El.innerHTML && b4El.innerHTML === b7El.innerHTML) {
-        vinnertekstEl.innerHTML = `Spiller ${b1El.innerHTML} vant`;
+        vinner = b1El.innerHTML;
     } else if (b2El.innerHTML === b5El.innerHTML && b5El.innerHTML === b8El.innerHTML) {
-        vinnertekstEl.innerHTML = `Spiller ${b2El.innerHTML} vant`;
+        vinner = b2El.innerHTML;
     } else if (b3El.innerHTML === b6El.innerHTML && b6El.innerHTML === b9El.innerHTML) {
-        vinnertekstEl.innerHTML = `Spiller ${b3El.innerHTML} vant`;
+        vinner = b3El.innerHTML;
     } else if (b1El.innerHTML === b5El.innerHTML && b5El.innerHTML === b9El.innerHTML) {
-        vinnertekstEl.innerHTML = `Spiller ${b1El.innerHTML} vant`;
+        vinner = b1El.innerHTML;
     } else if (b3El.innerHTML === b5El.innerHTML && b5El.innerHTML === b7El.innerHTML) {
-        vinnertekstEl.innerHTML = `Spiller ${b3El.innerHTML} vant`;
+        vinner = b3El.innerHTML;
+    } else {
+        vinnertekstEl.innerHTML = "";
+    }
+
+    /* Hvis det er en vinner så skriver den ut hvem som vant.
+    Hvis det ikke er en vinner eller vinneren er en tom streng så skriver den ingenting. */
+    if (vinner !== "") {
+        vinnertekstEl.innerHTML = `Spiller ${vinner} vant`;
     } else {
         vinnertekstEl.innerHTML = "";
     }
 }
 
 
-
-
 // Lager funksjonen som kjøres når du trykker på en boks/celle.
 function spill() {
+    antallklikk++;              // øker antallklikk med 1.
+    console.log(antallklikk);
+
     // Sjekker om boksen/cellen er tom, hvis den ikke er det så skjer det ingenting.
     if (this.innerHTML === spiller1 || this.innerHTML === spiller2) {
         return;
@@ -116,13 +141,25 @@ function spill() {
     Sjekker om det er spiller 1 sin tur, hvis det er det så skriver den X i boksen/cellen.
     Hvis det ikke er spiller 1 sin tur så skriver den O i boksen/cellen. */
     klikktur();
+
     if (spillernaa === spiller1) {
         this.innerHTML = spiller1;
     }
     else {
         this.innerHTML = spiller2;
     }
-    // Kjører funksjonen vinnersjekk som sjekker om noen har vunnet.
-    vinnersjekk1();
+
+    if (antallklikk >= 5) {
+        if (metode === 1) {
+            vinnersjekk1();
+        } else {
+            vinnersjekk2();
+        }
+
+    }
+    if (antallklikk === 9 && vinner === "") {
+        vinnertekstEl.innerHTML = "Uavgjort";
+    }
+
 }
 
